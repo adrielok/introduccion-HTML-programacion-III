@@ -127,29 +127,52 @@
     <form>
         <h1>Formulario </h1>
         <label for="">Nombre</label>
-        <input type="text"><br>
+        <input type="text" id="nombre"><br>
         <label for="">Apellido</label>
-        <input type="text"><br>
+        <input type="text" id="Apellido"><br>
         <label for="">Edad</label>
-        <input type="text"><br>
+        <input type="text" id="Edad"><br>
         <label for="">Email</label>
-        <input type="email" name="" id=""><br>
+        <input type="email" name="" id="Email"><br>
         <label for="">Fecha de nacimiento</label>
-        <input type="datetime-local" name="" id=""><br>
+        <input type="datetime-local" name="" id="Fecha de nacimiento"><br>
         <label for="">Genero</label>
-        <input type="checkbox" name="" id="">Masculino
-        <input type="checkbox" name="" id="">Femenino
+        <input type="checkbox" name="" id="Hombre">Masculino
+        <input type="checkbox" name="" id="Mujer">Femenino
         <br>
         <label for="">Programador</label>
         <select name="" id="">
             <option value="">Eliga una opcion</option>
-            <option value="">Des FRONTEND</option>
-            <option value="">Des BACKEND</option>
-            <option value="">Lider de equipo</option>
-            <option value="">Senior PYTHON</option>
+            <option value="Des FRONTEND">Des FRONTEND</option>
+            <option value="Des BACKEND">Des BACKEND</option>
+            <option value="Lider">Lider de equipo</option>
+            <option value="Senior PYTHON">Senior PYTHON</option>
         </select><br>
-        <button type="button" value="Guardar">Guardar
+        <button type="button" value="Guardar" onclick="guardar()">Guardar
     </form>
+    <div id ="mensaje">
+
+    </div>
 
 </body>
 </html>
+
+<script>
+function guardar(){
+    let nombre=document.getElementById("nombre").value;
+    alert(nombre)
+
+    let apelli=document.getElementById("Apellido").value;
+    alert(apelli)
+
+    let fecha=document.getElementById("Fecha de nacimiento").value;
+    alert(fecha)
+
+    let mas=document.getElementById("Hombre").value;
+    alert(mas)
+
+    let fem=document.getElementById("Mujer").value;
+    alert(fem)
+
+}
+</script>

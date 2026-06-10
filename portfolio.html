@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Adriel Mansilla – Portfolio</title>
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;700&family=JetBrains+Mono:wght@400;700&display=swap" rel="stylesheet"/>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0d0f14;
+      --surface:   #161a23;
+      --border:    #252a36;
+      --accent:    #4ade80;   /* verde código */
+      --accent2:   #818cf8;   /* violeta suave */
+      --text:      #e2e8f0;
+      --muted:     #64748b;
+      --font-head: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: var(--font-head);
+      line-height: 1.6;
+    }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; width: 100%;
+      background: rgba(13,15,20,.85);
+      backdrop-filter: blur(10px);
+      border-bottom: 1px solid var(--border);
+      z-index: 100;
+      display: flex; justify-content: space-between; align-items: center;
+      padding: .9rem 2rem;
+    }
+    .nav-logo {
+      font-family: var(--font-mono);
+      color: var(--accent);
+      font-size: 1rem;
+      letter-spacing: .05em;
+    }
+    .nav-links { display: flex; gap: 2rem; list-style: none; }
+    .nav-links a {
+      color: var(--muted); text-decoration: none;
+      font-size: .9rem; transition: color .2s;
+    }
+    .nav-links a:hover { color: var(--accent); }
+
+    /* ── HERO ── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items: center; justify-content: center;
+      padding: 6rem 2rem 4rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    /* grid de fondo estilo terminal */
+    .hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background-image:
+        linear-gradient(var(--border) 1px, transparent 1px),
+        linear-gradient(90deg, var(--border) 1px, transparent 1px);
+      background-size: 40px 40px;
+      opacity: .35;
+    }
+    .hero-inner { position: relative; max-width: 700px; }
+
+    .hero-tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: .8rem;
+      color: var(--accent);
+      border: 1px solid var(--accent);
+      border-radius: 2px;
+      padding: .25rem .75rem;
+      margin-bottom: 1.5rem;
+      letter-spacing: .1em;
+    }
+    h1 {
+      font-size: clamp(2.8rem, 8vw, 5rem);
+      font-weight: 700;
+      line-height: 1.05;
+      margin-bottom: 1rem;
+    }
+    h1 span { color: var(--accent); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 480px;
+      margin: 0 auto 2rem;
+    }
+    .hero-age {
+      font-family: var(--font-mono);
+      font-size: .85rem;
+      color: var(--accent2);
+    }
+    .cta {
+      display: inline-block;
+      margin-top: 2rem;
+      padding: .75rem 2rem;
+      background: var(--accent);
+      color: var(--bg);
+      border-radius: 4px;
+      font-weight: 700;
+      text-decoration: none;
+      font-size: .95rem;
+      transition: opacity .2s, transform .15s;
+    }
+    .cta:hover { opacity: .85; transform: translateY(-2px); }
+
+    /* ── SECCIONES ── */
+    section { padding: 5rem 2rem; max-width: 900px; margin: 0 auto; }
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: .78rem;
+      color: var(--accent);
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      margin-bottom: .5rem;
+    }
+    h2 {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 2.5rem;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: .75rem;
+    }
+
+    /* ── SOBRE MÍ ── */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+    .about-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+    }
+    .about-card .label {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      margin-bottom: .4rem;
+    }
+    .about-card .value {
+      font-size: 1rem;
+      color: var(--text);
+    }
+
+    /* ── SKILLS ── */
+    .skills-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 1rem;
+    }
+    .skill-pill {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      padding: 1rem 1.25rem;
+      display: flex; align-items: center; gap: .75rem;
+      transition: border-color .2s, transform .15s;
+    }
+    .skill-pill:hover { border-color: var(--accent); transform: translateY(-3px); }
+    .skill-icon {
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+    .skill-info .skill-name {
+      font-weight: 600;
+      font-size: .95rem;
+    }
+    .skill-info .skill-cat {
+      font-family: var(--font-mono);
+      font-size: .72rem;
+      color: var(--muted);
+    }
+
+    /* ── EDUCACIÓN ── */
+    .edu-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-left: 3px solid var(--accent2);
+      border-radius: 0 8px 8px 0;
+      padding: 1.5rem 2rem;
+    }
+    .edu-card h3 { font-size: 1.1rem; margin-bottom: .35rem; }
+    .edu-card p { color: var(--muted); font-size: .9rem; }
+    .edu-card .badge {
+      display: inline-block;
+      margin-top: .75rem;
+      font-family: var(--font-mono);
+      font-size: .75rem;
+      background: rgba(129,140,248,.15);
+      color: var(--accent2);
+      border: 1px solid var(--accent2);
+      border-radius: 3px;
+      padding: .2rem .6rem;
+    }
+
+    /* ── HOBBIES ── */
+    .hobbies-list {
+      display: flex; flex-wrap: wrap; gap: .75rem;
+    }
+    .hobby {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 99px;
+      padding: .5rem 1.25rem;
+      font-size: .9rem;
+      display: flex; align-items: center; gap: .5rem;
+      transition: border-color .2s;
+    }
+    .hobby:hover { border-color: var(--accent); }
+
+    /* ── FOOTER ── */
+    footer {
+      text-align: center;
+      padding: 2.5rem 1rem;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-family: var(--font-mono);
+      font-size: .8rem;
+    }
+    footer span { color: var(--accent); }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 600px) {
+      .about-grid { grid-template-columns: 1fr; }
+      nav { padding: .8rem 1rem; }
+      .nav-links { gap: 1.2rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <span class="nav-logo">adriel.dev</span>
+    <ul class="nav-links">
+      <li><a href="#sobre-mi">Sobre mí</a></li>
+      <li><a href="#skills">Skills</a></li>
+      <li><a href="#educacion">Educación</a></li>
+      <li><a href="#hobbies">Hobbies</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <header class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">// disponible para proyectos</div>
+      <h1>Hola, soy<br><span>Adriel Mansilla</span></h1>
+      <p class="hero-sub">Estudiante de programación apasionado por el desarrollo web y las tecnologías de bases de datos.</p>
+      <p class="hero-age">17 años · Córdoba, Argentina</p>
+      <a href="#skills" class="cta">Ver mis skills →</a>
+    </div>
+  </header>
+
+  <!-- SOBRE MÍ -->
+  <section id="sobre-mi">
+    <p class="section-label">01 / sobre mí</p>
+    <h2>¿Quién soy?</h2>
+    <div class="about-grid">
+      <div class="about-card">
+        <p class="label">Nombre completo</p>
+        <p class="value">Adriel Mansilla</p>
+      </div>
+      <div class="about-card">
+        <p class="label">Fecha de nacimiento</p>
+        <p class="value">17 de febrero de 2009</p>
+      </div>
+      <div class="about-card">
+        <p class="label">Ubicación</p>
+        <p class="value">Córdoba, Argentina</p>
+      </div>
+      <div class="about-card">
+        <p class="label">Estado actual</p>
+        <p class="value">Aprendiendo HTML, CSS & JS 🚀</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SKILLS -->
+  <section id="skills">
+    <p class="section-label">02 / tecnologías</p>
+    <h2>Mis Skills</h2>
+    <div class="skills-grid">
+      <div class="skill-pill">
+        <span class="skill-icon">🐍</span>
+        <div class="skill-info">
+          <p class="skill-name">Python</p>
+          <p class="skill-cat">Lenguaje</p>
+        </div>
+      </div>
+      <div class="skill-pill">
+        <span class="skill-icon">🎨</span>
+        <div class="skill-info">
+          <p class="skill-name">Flet</p>
+          <p class="skill-cat">Framework UI</p>
+        </div>
+      </div>
+      <div class="skill-pill">
+        <span class="skill-icon">🗄️</span>
+        <div class="skill-info">
+          <p class="skill-name">MySQL · DDL</p>
+          <p class="skill-cat">Base de datos</p>
+        </div>
+      </div>
+      <div class="skill-pill">
+        <span class="skill-icon">🌐</span>
+        <div class="skill-info">
+          <p class="skill-name">HTML</p>
+          <p class="skill-cat">Aprendiendo</p>
+        </div>
+      </div>
+      <div class="skill-pill">
+        <span class="skill-icon">💅</span>
+        <div class="skill-info">
+          <p class="skill-name">CSS</p>
+          <p class="skill-cat">Aprendiendo</p>
+        </div>
+      </div>
+      <div class="skill-pill">
+        <span class="skill-icon">⚡</span>
+        <div class="skill-info">
+          <p class="skill-name">JavaScript</p>
+          <p class="skill-cat">Aprendiendo</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- EDUCACIÓN -->
+  <section id="educacion">
+    <p class="section-label">03 / educación</p>
+    <h2>Dónde estudio</h2>
+    <div class="edu-card">
+      <h3>IPET N°57 Comodoro Martín Rivadavia</h3>
+      <p>Instituto Provincial de Educación Técnica · Córdoba, Argentina</p>
+      <span class="badge">6to año — 2025</span>
+    </div>
+  </section>
+
+  <!-- HOBBIES -->
+  <section id="hobbies">
+    <p class="section-label">04 / tiempo libre</p>
+    <h2>Hobbies</h2>
+    <div class="hobbies-list">
+      <div class="hobby">🏋️ Gym</div>
+      <div class="hobby">⚽ Fútbol</div>
+      <div class="hobby">🎮 Videojuegos</div>
+      <div class="hobby">💻 Programar</div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>Hecho con <span>♥</span> por Adriel Mansilla · 2025</p>
+  </footer>
+
+</body>
+</html>
+b   
