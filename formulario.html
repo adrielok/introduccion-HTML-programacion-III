@@ -127,52 +127,49 @@
     <form>
         <h1>Formulario </h1>
         <label for="">Nombre</label>
-        <input type="text" id="nombre"><br>
+        <input type="text" id="nombre" placeholder="NOMBRE"><br>
         <label for="">Apellido</label>
-        <input type="text" id="Apellido"><br>
+        <input type="text" id="apellido" placeholder="Apellido"><br>
         <label for="">Edad</label>
-        <input type="text" id="Edad"><br>
+        <input type="text" id="edad"><br>
         <label for="">Email</label>
-        <input type="email" name="" id="Email"><br>
+        <input type="email" name="" id="email"><br>
         <label for="">Fecha de nacimiento</label>
-        <input type="datetime-local" name="" id="Fecha de nacimiento"><br>
+        <input type="datetime-local" name="" id="fecha"><br>
         <label for="">Genero</label>
-        <input type="checkbox" name="" id="Hombre">Masculino
-        <input type="checkbox" name="" id="Mujer">Femenino
+        <input type="checkbox" name="" id="hombre">Masculino
+        <input type="checkbox" name="" id="mujer">Femenino
         <br>
         <label for="">Programador</label>
-        <select name="" id="">
+        <select name="" id="opcion">
             <option value="">Eliga una opcion</option>
-            <option value="Des FRONTEND">Des FRONTEND</option>
-            <option value="Des BACKEND">Des BACKEND</option>
-            <option value="Lider">Lider de equipo</option>
-            <option value="Senior PYTHON">Senior PYTHON</option>
-        </select><br>
-        <button type="button" value="Guardar" onclick="guardar()">Guardar
+            <option value="Des Frontend">Des FRONTEND</option>
+            <option value="Des backend">Des BACKEND</option>
+            <option value="LIDER">Lider de equipo</option>
+            <option value="SENIOR PYTHON">Senior PYTHON</option>
+        </select><br><br>
+        <input type="button" value="Guardar" onclick="guardar()">
+        
     </form>
-    <div id ="mensaje">
+    <br><br>
+    
+    <section class="mensaje" id="mensaje">
 
-    </div>
+    </section>
 
 </body>
 </html>
 
 <script>
 function guardar(){
-    let nombre=document.getElementById("nombre").value;
-    alert(nombre)
-
-    let apelli=document.getElementById("Apellido").value;
-    alert(apelli)
-
-    let fecha=document.getElementById("Fecha de nacimiento").value;
-    alert(fecha)
-
-    let mas=document.getElementById("Hombre").value;
-    alert(mas)
-
-    let fem=document.getElementById("Mujer").value;
-    alert(fem)
-
+    let nombre= document.getElementById("nombre").value;
+    let apellido= document.getElementById("apellido").value;
+    let edad= document.getElementById("edad").value;
+    let email= document.getElementById("email").value;
+    let fecha= document.getElementById("fecha").value;
+    let opcion= document.getElementById("opcion").value;
+    document.getElementById("mensaje").innerHTML = 
+    "Bienvenido"+ nombre + apellido + "<br/> " + edad + "<br/>" + email 
+    + "<br/>" + fecha + "<br/>" + opcion;
 }
 </script>
