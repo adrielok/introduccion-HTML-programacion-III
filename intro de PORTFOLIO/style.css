@@ -1,0 +1,215 @@
+/* HEADER */
+header{
+    background-color: rgb(227, 65, 11);
+    position: relative;
+    font-size: 30px;
+}
+
+header h1{
+    text-align: center;
+    color: rgb(255, 255, 255);
+}
+
+
+header img{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    position: absolute;
+    padding: 8px;
+    
+} 
+
+nav a{
+    text-decoration: none;
+    color: white;
+    padding: 5px; 
+}
+
+nav{
+    margin-left: 350px;
+}
+
+/* BODY */
+body{
+    background-color: rgb(161, 81, 28);
+}
+
+/* MAIN */
+.c1 img {
+    width: 200px;
+    height: 200px;  
+    border: 3px solid rgb(43, 42, 42); 
+}
+
+
+.c1{
+
+    margin-top: 5px; 
+    padding: 10px;
+    color: white;
+    width: 40%;
+    margin-left: 100px;
+    
+}
+
+.c2{
+
+    color: white;
+    width: 45%;
+    margin-top: 15px;
+}
+
+.c3{
+    margin-top: 10px;
+}
+
+MAIN{
+    display: flex;
+}
+
+/*FOOTER */
+
+footer{
+    background-color: rgb(227, 65, 11);
+    color: white;
+    padding: 10px;
+}
+
+footer img{
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    
+}
+
+footer p{
+    font-size: 20px;
+    text-align: center;
+}
+
+.i1{
+    margin-left: 1200px;
+}
+
+
+
+
+/* ========================= */
+/* RESPONSIVE */
+/* ========================= */
+
+@media (max-width: 1024px){
+
+    nav{
+        margin-left: 0;
+        text-align: center;
+        margin-top: 20px;
+    }
+
+    nav a{
+        display: inline-block;
+        margin: 5px;
+        font-size: 20px;
+    }
+
+    main{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .c1,
+    .c2{
+        width: 90%;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .c1 img{
+        width: 100%;
+        max-width: 350px;
+        height: auto;
+    }
+
+    header{
+        padding-bottom: 20px;
+    }
+
+    header img{
+        position: static;
+        display: block;
+        margin: auto;
+    }
+
+    header h1{
+        font-size: 28px;
+        margin-top: 10px;
+    }
+
+    table{
+        width: 95%;
+        font-size: 18px;
+    }
+
+    th,
+    td{
+        padding: 10px;
+    }
+
+    ol,
+    ul{
+        width: 85%;
+        font-size: 18px;
+    }
+
+    footer{
+        text-align: center;
+    }
+
+    footer img{
+        margin: 5px;
+    }
+}
+
+/* CELULARES */
+@media (max-width: 600px){
+
+    header h1{
+        font-size: 22px;
+    }
+
+    nav a{
+        display: block;
+        padding: 10px;
+        font-size: 18px;
+    }
+
+    .c1,
+    .c2{
+        width: 95%;
+    }
+
+    .c1 img{
+        width: 100%;
+    }
+
+    table{
+        font-size: 15px;
+    }
+
+    th,
+    td{
+        padding: 8px;
+    }
+
+    ol,
+    ul{
+        width: 90%;
+        padding: 15px;
+        font-size: 16px;
+    }
+
+    footer p{
+        font-size: 16px;
+    }
+}
