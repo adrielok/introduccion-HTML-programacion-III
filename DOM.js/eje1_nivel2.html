@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ejercico 1 del nivel 2</title>
+</head>
+<body>
+    <h1>Ejercicio 1 Supermercado</h1>
+    <form action="">
+        Nombres del producto<input type="" id="Np">
+        Cantidad<input type="number" id="Ca">
+        Precio unitario<input type="number" id="Pu">
+        <input type="button" onclick="comprar()" value="Comprar">
+    </form>
+    <h1>factura</h1>
+    <table border="1">
+        <tr>
+            <th>Producto</th>
+            <th>Cantidad</th>
+            <th>Precio unitario</th>
+            <th>Subtotal</th>
+        </tr>
+
+        <tbody id="tabla">
+
+        </tbody>
+    </table>  
+    <h3>Total general: $<span id="total">0</span></h3>    
+    <script>    
+    let nombre_producto = []
+    let Canti = []
+    let Precio_uni = []
+
+    function comprar(){
+        let Np = document.getElementById("Np").value;
+        let Ca = parseInt(document.getElementById("Ca").value);
+        let Pu = parseInt(document.getElementById("Pu").value);
+            nombre_producto.push(Np);
+            Canti.push(Ca);
+            Precio_uni.push(Pu);
+        
+            let tabla = document.getElementById("tabla");
+
+            tabla.innerHTML = "";
+
+            let total_general = 0;
+
+
+            for(let i = 0; i < nombre_producto.length; i++){
+
+                let subtotal = Canti[i] * Precio_uni[i];
+
+                total_general = total_general + subtotal;
+
+                tabla.innerHTML += `
+                <tr>
+                    <td>${nombre_producto[i]}</td>
+                    <td>${Canti[i]}</td>
+                    <td>$${Precio_uni[i]}</td>
+                    <td>$${subtotal}</td>
+                </tr>
+            `;
+        }
+
+
+        document.getElementById("total").innerHTML = total_general;
+    }
+    
+    </script>
+    
+    
+</body>
+</html>

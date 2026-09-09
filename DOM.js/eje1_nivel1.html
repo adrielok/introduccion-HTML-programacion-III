@@ -1,0 +1,44 @@
+ejercicio 1 <!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ejercicio 1 Monto</title>
+</head>
+<body>
+    <h1>Ejercicio 1 Monto</h1>
+    <form action="">
+        Precio <input type="number" id="monto">
+        <input type="button" onclick="enviar()" value="Cargar">
+    </form>
+
+    <h1>Listado de precios</h1>
+    Precios<p id="precios"></p>
+    Total<p id="total"></p>
+    Promedio<p id="promedio"></p>
+
+    <script>
+        let precio = [];
+
+        function enviar(){
+            let monto = parseInt(document.getElementById("monto").value);
+            precio.push(monto);
+            let sumatotal = 0;
+
+            for(let i = 0; i < precio.length; i++){
+                sumatotal = sumatotal + precio[i];
+            }
+
+            let promedio = sumatotal / precio.length;
+
+            document.getElementById("precios").innerText = precio.join(", $");
+            document.getElementById("total").innerText = sumatotal;
+            document.getElementById("promedio").innerText = promedio.toFixed(2);
+            
+            // Limpiamos el input
+            document.getElementById("monto").value = "";
+        }
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liquidación de Sueldos y Horas Extra</title>
+</head>
+<body>
+    <h1> Liquidación de Sueldos y Horas Extra </h1>
+    <form action="">
+        Empleado <input type="" id="Em">
+        Horas trabajadas<input type="number" id="Hs">
+        Tarifa de horas<input type="number" id="Ta">
+        <input type="button" onclick="calcular()" value="Calcular">
+    </form>
+<h2>Listado de la empresa</h2>
+    Nombre del empleado:<p id="nombre"></p>
+    Horas trabajadas en el mes:<p id="Horas"></p>
+    Tarifa de las horas:<p id="tarifa_hs"></p> 
+    <h2>Gasto total de la empresa: $<span id="Total">0</span></h2>
+    
+    <script>
+        let Emple = []
+        let Horas_normales= []
+        let Tari = []
+        let Sueldo_empleado = []
+
+        function calcular(){
+        let Em = document.getElementById("Em").value;
+        let Hs = parseInt(document.getElementById("Hs").value);
+        let Ta = parseInt(document.getElementById("Ta").value);
+            Emple.push(Em);
+            Horas_normales.push(Hs);
+            Tari.push(Ta);
+            
+            let sueldo_total = 0;
+
+            let gasto_total = 0;
+
+            for(let i = 0; i < Emple.length; i++){
+                if (Horas_normales[i] > 40) {
+                    let horas_extra = Horas_normales[i] - 40;
+                    let sueldo_normal = 40 * Tari[i];
+                    let sueldo_extra = horas_extra * Tari[i] * 1.5;
+                    sueldo_total = sueldo_normal + sueldo_extra;
+
+                } else {
+                     sueldo_total = Horas_normales[i] * Tari[i];
+                }    
+
+                Sueldo_empleado.push(sueldo_total);
+
+                
+                gasto_total = gasto_total + sueldo_total;
+
+                document.getElementById("Total").innerHTML = gasto_total;
+                document.getElementById("nombre").innerHTML = Emple;
+                document.getElementById("Horas").innerHTML= Horas_normales;
+                document.getElementById("tarifa_hs").innerHTML = Tari;
+            }
+        }
+
+        
+    </script>
+
+
+</body>
+</html>

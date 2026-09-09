@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nivel 4</title>
+</head>
+<body>
+    <h1>Gastos de una empresa</h1>
+    <form action="">
+        Empleado <input type="" id="Em">
+        horas del mes<input type="number" id="Hs">
+        Tarifa <input type="number" id="Ta">
+        <input type="button" onclick="calcular()" value="Calcular">
+    </form>
+    <h2>Listado de empresa</h2>
+    nombre del Empleado: <p id="nombre"></p>
+    Horas trabajadas del mes: <p id="Horas"></p>
+    tarifa de las horas: <p id="tarifa_hs"></p>
+    <h2>Gastos de la empresa:$ <span id="Total">0</span></h2>
+
+    <script>
+        let Emple = []
+        let Tari = []
+        let Horas_normales = []
+        let Sueldo_empleado = []
+
+        function calcular(){
+            let Em = document.getElementById("Em").value;
+            let Hs = parseInt(getElementById("Hs").value);
+            let Ta = parseInt(getElementById("Ta").value);
+            Emple.push(Em)
+            Tari.push(Ta)
+            Horas_totales.push(Hs)
+            
+            let sueldo_total = 0
+
+            let gasto_total = 0 
+
+
+            for(let i = 0; i< Emple.length;i++){
+                if (Horas_totales[i] > 40){
+                    let Horas_extras = Horas_totales[i] - 40;
+                    let sueldo_normal = 40 * Tari[i];
+                    let sueldo_extra = Horas_extras * Tari[i] * 1.5;
+                    let sueldo_total = sueldo_extra + sueldo_normal;
+                }else{
+                    sueldo_total = Horas_normales[i] * Tari[i];
+                }
+                
+                Sueldo_empleado.push(sueldo_total)
+
+                document.getElementById("Total").innerHTML = gasto_total
+                document.getElementById("nombre").innerHTML =Emple
+                document.getElementById("tarifa_hs").innerHTML = Tari
+                document.getElementById("Horas").innerHTML = Horas_normales 
+
+            }
+        }
+
+
+    </script>
+</body>
+
+
+</html>
+
+
+
+
+
+

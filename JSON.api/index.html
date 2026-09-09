@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cartelera de Cine</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f2f2f2;
+    color: #333;
+}
+
+header {
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 30px;
+}
+
+header h1 {
+    margin-bottom: 10px;
+}
+
+main {
+    width: 90%;
+    max-width: 1100px;
+    margin: 30px auto;
+    text-align: center;
+}
+
+button {
+    background-color: #e50914;
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    font-size: 16px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 30px;
+}
+
+button:hover {
+    background-color: #b20710;
+}
+
+.contenedor-peliculas {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 20px;
+}
+
+.pelicula {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.15);
+    text-align: left;
+}
+
+.pelicula h2 {
+    font-size: 20px;
+    margin-bottom: 15px;
+}
+
+.pelicula p {
+    margin: 8px 0;
+}
+
+.titulo {
+    color: #e50914;
+}
+
+.genero {
+    font-weight: bold;
+}
+
+.año {
+    color: #666;
+}
+
+#mensaje {
+    margin-top: 20px;
+    color: red;
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🎬 Cartelera de Cine</h1>
+        <p>Películas disponibles</p>
+    </header>
+
+    <main>
+        <button id="btnCargar" onclick="cargarPeliculas()">
+            Cargar películas
+        </button>
+
+        <div id="peliculas" class="contenedor-peliculas">
+            <!-- Las películas se cargarán acá -->
+        </div>
+        
+
+        <p id="mensaje"></p>
+    </main>
+
+    
+
+</body>
+</html>
+
+<script>
+    async function cargarPeliculas() {
+
+    try {
+
+        const respuesta = await fetch("peli.json");
+
+        const peliculas = await respuesta.json();
+
+        const contenedor = document.getElementById("peliculas");
+        const mensaje = document.getElementById("mensaje");
+
+        contenedor.innerHTML = "";
+        mensaje.innerHTML = "";
+
+        for (let i = 0; i < peliculas.length; i++) {
+
+            contenedor.innerHTML += `
+                <div class="pelicula">
+                    <img src='peliculas[i].imagen'  alt="">
+                    <h2 class="titulo">${peliculas[i].titulo}</h2>
+                    <p class="genero">Género: ${peliculas[i].genero}</p>
+                    <p class="año">Año: ${peliculas[i].año}</p>
+                </div>
+            `;
+        }
+
+    } catch (error) {
+
+        const mensaje = document.getElementById("mensaje");
+
+        mensaje.innerHTML = "Error al cargar las películas.";
+
+        console.error("Error:", error);
+    }
+}
+</script>
