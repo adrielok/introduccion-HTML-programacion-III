@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat Bot</title>
+</head>
+<body onload="cargar()">
+    <h1>Chat Preguntas </h1>
+    <form action="">
+        <label for="">Mensaje</label>
+        <input type="text" id="mensaje">
+        <input type="button" value = "Consultar" onclick="mostrar()">
+    </form>
+    <h2>Respuesta del chat</h2>
+    <div id="respuesta"></div>
+
+    
+</body>
+
+<script>
+    let datos =[]
+    async function cargar(){
+        try{
+            let preguntas = await fetch ("chat_bot.json");
+            datos = await preguntas.json();
+
+        }catch(Error){
+            alert ("Error")
+        }
+    }
+
+    function mostrar(){
+        let mensaje = document.getElementById("mensaje").value 
+
+        for (let i = 0; i < datos.length; i++){
+            if(datos[i].keywords.includes(mensaje)){
+                document.getElementById("respuesta").innerHTML = datos[i].respuesta
+            }
+        }
+    }    
+    
+
+</script>
+</html>

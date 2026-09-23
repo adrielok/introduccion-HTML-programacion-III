@@ -1,0 +1,23 @@
+[ 
+{ 
+"keywords": ["hola", "buenas", "inicio", "saludos"], 
+"respuesta": "¡Hola! ¿En qué puedo ayudarte hoy?" 
+}, 
+
+{ 
+"keywords": ["horario", "hora", "turnos", "clases"], 
+"respuesta": "El horario de cursado es de Lunes a Viernes de 7:30 hs a 13:00 hs." 
+}, 
+{ 
+"keywords": ["inscripcion", "inscribirme", "anotarse", "matricula"], 
+"respuesta": "Las inscripciones están abiertas a través del portal web institucional en la sección Alumnos." 
+}, 
+{ 
+"keywords": ["materia", "materias", "programa", "plan"], 
+"respuesta": "Las materias del ciclo especializado son Programación, Base de Datos y Formación para el Trabajo." 
+}, 
+{ 
+"keywords": ["profesor", "profe", "docente"], 
+"respuesta": "Podés contactar a tus profesores mediante el aula virtual o en los horarios de consulta." 
+} 
+] 

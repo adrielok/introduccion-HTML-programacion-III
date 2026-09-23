@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>API Dólar</title>
+
+    <style>
+        :root {
+            --bg-color: #0f172a;        /* Fondo oscuro azulado */
+        --card-bg: #1e293b;         /* Fondo de las tarjetas */
+        --card-border: #334155;     /* Borde sutil */
+        --text-title: #f8fafc;      /* Texto blanco/brillante */
+        --text-label: #94a3b8;      /* Texto gris secundario */
+        --accent-purple: #6366f1;   /* Accent violeta */
+        --radius: 10px;
+        }
+
+        * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        }
+
+        body {
+        background-color: var(--bg-color);
+        color: var(--text-title);
+        max-width: 900px;
+        margin: 0 auto;
+        padding: 2rem 1rem;
+        }
+
+        h1 {
+        font-size: 1.8rem;
+        margin-bottom: 1.5rem;
+        text-align: center;
+        }
+
+        h2 {
+        font-size: 1.25rem;
+        margin: 2.5rem 0 1rem 0;
+        color: var(--text-title);
+        }
+
+        /* Grilla de tarjetas para las cotizaciones en 2 columnas */
+        #dolar_oficial {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 1.25rem;
+        }
+
+        .card-dolar {
+        background-color: var(--card-bg);
+        border: 1px solid var(--card-border);
+        border-radius: var(--radius);
+        padding: 1.25rem 1.5rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .card-dolar:hover {
+        transform: translateY(-2px);
+        border-color: #475569;
+        }
+
+        .card-dolar h3 {
+        font-size: 1.1rem;
+        font-weight: 700;
+        color: var(--text-title);
+        }
+
+        .valores-container {
+        display: flex;
+        gap: 1.5rem;
+        text-align: center;
+        }
+
+        .valor-box {
+        display: flex;
+        flex-direction: column;
+        }
+
+        .valor-box .label {
+        font-size: 0.75rem;
+        font-weight: 600;
+        color: var(--text-label);
+        text-transform: uppercase;
+        margin-bottom: 0.25rem;
+        }
+
+        .valor-box .precio {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--text-title);
+        }
+
+        /* Formulario */
+        form {
+        background: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--card-border);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 1rem;
+        align-items: end;
+        }
+
+        .form-group {
+        display: flex;
+        flex-direction: column;
+        gap: 0.4rem;
+        font-size: 0.85rem;
+        color: var(--text-label);
+        }
+
+        select, input[type="number"] {
+        padding: 0.65rem 0.85rem;
+        border: 1px solid var(--card-border);
+        border-radius: 6px;
+        font-size: 0.95rem;
+        outline: none;
+        background-color: var(--bg-color);
+        color: var(--text-title);
+        }
+
+        select:focus, input[type="number"]:focus {
+        border-color: var(--accent-purple);
+        }
+
+        input[type="button"] {
+        background-color: var(--accent-purple);
+        color: white;
+        border: none;
+        padding: 0.75rem;
+        border-radius: 6px;
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: opacity 0.2s;
+        }
+
+        input[type="button"]:hover {
+        opacity: 0.9;
+        }
+
+        /* Contenedor del resultado */
+        #monto_resultado {
+        background: var(--card-bg);
+        padding: 1.25rem;
+        border-radius: var(--radius);
+        border: 1px solid var(--card-border);
+        font-size: 1.2rem;
+        font-weight: 600;
+        color: #34d399;
+        min-height: 60px;
+        display: flex;
+        align-items: center;
+        }
+    </style>
+    </head>
+    <body>
+
+        <h1>Cotización Dólar Argentina</h1>
+        
+        <div id="dolar_oficial"></div>
+
+        <h2>Compra y Venta</h2>
+        <form>
+        <div class="form-group">
+            <label for="tipo_dolar">Tipo de dólar</label>
+            <select id="tipo_dolar">
+            <option value="oficial">Oficial</option>
+            <option value="blue">Blue</option>
+            <option value="bolsa">Bolsa</option>
+            <option value="mayorista">Mayorista</option>
+            <option value="cripto">Cripto</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="opcion">Operación</label>
+            <select id="opcion">
+            <option value="compra">Compra</option>
+            <option value="venta">Venta</option>
+            </select>
+        </div>
+
+        <div class="form-group">
+            <label for="monto">Monto en USD</label>
+            <input type="number" id="monto" placeholder="Ej: 100" min="0">
+        </div>
+
+        <input type="button" value="Calcular Monto" onclick="mostrar()">
+        </form>
+
+        <h2>Monto de Operación</h2>
+        <div id="monto_resultado">Ingrese un monto para ver el resultado en ARS.</div>
+
+        <script>
+        let api_dolar = [];
+
+        async function cargar() {
+            try {
+            let datos = await fetch("dolar.json"); // O URL externa como https://dolarapi.com/v1/dolares
+            api_dolar = await datos.json();
+            let contenedor = document.getElementById("dolar_oficial");
+
+            contenedor.innerHTML = "";
+
+            for (let i = 0; i < api_dolar.length; i++) {
+                let nombre = api_dolar[i].nombre || api_dolar[i].moneda || api_dolar[i].casa;
+
+                contenedor.innerHTML += `
+                <div class="card-dolar">
+                    <h3>Dólar ${nombre}</h3>
+                    <div class="valores-container">
+                    <div class="valor-box">
+                        <span class="label">Compra</span>
+                        <span class="precio">$${api_dolar[i].compra}</span>
+                    </div>
+                    <div class="valor-box">
+                        <span class="label">Venta</span>
+                        <span class="precio">$${api_dolar[i].venta}</span>
+                    </div>
+                    </div>
+                </div>
+                `;
+            }
+            } catch (error) {
+            alert("Error de la API: " + error);
+            }
+        }
+
+        function mostrar() {
+            let tipoDolar = document.getElementById("tipo_dolar").value.toLowerCase();
+            let operacion = document.getElementById("opcion").value; // 'compra' o 'venta'
+            let cantidad = parseFloat(document.getElementById("monto").value);
+            let contenedorResultado = document.getElementById("monto_resultado");
+
+            if (isNaN(cantidad) || cantidad <= 0) {
+            contenedorResultado.innerHTML = "Por favor, ingrese un monto válido.";
+            return;
+            }
+
+            // Buscar en la lista el dólar seleccionado
+            let dolarEncontrado = api_dolar.find(item => {
+            let nombreItem = (item.casa || item.nombre || item.moneda || "").toLowerCase();
+            return nombreItem.includes(tipoDolar);
+            });
+
+            if (dolarEncontrado) {
+            let cotizacion = parseFloat(dolarEncontrado[operacion]);
+            let total = cantidad * cotizacion;
+
+            contenedorResultado.innerHTML = `
+                ${cantidad} USD a precio de <strong>${operacion}</strong> (${dolarEncontrado.casa || dolarEncontrado.nombre}) = $${total.toLocaleString('es-AR', { minimumFractionDigits: 2 })} ARS
+            `;
+            } else {
+            contenedorResultado.innerHTML = "No se encontró la cotización para la opción seleccionada.";
+            }
+        }
+
+        cargar();
+        </script>
+    </body>
